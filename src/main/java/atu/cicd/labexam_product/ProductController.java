@@ -15,8 +15,12 @@ public class ProductController {
     }
 
     @PostMapping("add-product")
-    public ArrayList<ProductDetails> addProduct(@RequestBody ProductDetails productDetails){
-        return productService.addProduct(productDetails);
+    public String addProduct(@RequestBody ProductDetails productDetails){
+        WarehouseDetails confirmCapacity = productServiceClient.warehouseDetail(productDetails);
+        if(confirmCapacity.getCapacity() > 0){
+            return("Product added to warehouse: " + productDetails);
+        }
+        return("No space available to add product");
     }
 
     @GetMapping("get-product/{productId}")
