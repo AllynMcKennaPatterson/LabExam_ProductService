@@ -1,8 +1,6 @@
 package atu.cicd.labexam_product;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -20,5 +18,18 @@ public class ProductController {
         allProducts.add(productDetails);
         System.out.println(allProducts);
         return allProducts;
+    }
+
+    @GetMapping("get-product/{productId}")
+    public ProductDetails getProduct(@PathVariable int productId){
+        for(int i =0; i < allProducts.size(); i++){
+            if(allProducts.get(i).getProductId() == productId) {
+                System.out.println(allProducts.get(i));
+                return allProducts.get(i);
+            }
+        }
+        ProductDetails errorProduct = new ProductDetails(productId, "Product not found", 0, 0);
+        System.out.println(errorProduct);
+        return  errorProduct;
     }
 }
