@@ -13,7 +13,7 @@ public class ProductService {
         return allProducts;
     }
 
-    public ProductDetails getProduct(int productId){
+    public ProductDetails getProductById(int productId){
         for(int i = 0; i < allProducts.size(); i++){
             if(allProducts.get(i).getProductId() == productId){
                 System.out.println("Product found: " + allProducts.get(i));
